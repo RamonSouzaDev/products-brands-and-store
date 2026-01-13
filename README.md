@@ -48,7 +48,37 @@ This project demonstrates senior-level development practices:
 - [Docker Desktop](https://www.docker.com/products/docker-desktop) installed
 - Git
 
-### Installation
+### ⚡ Automated Setup (Recommended)
+
+For the fastest setup experience, use our automated scripts:
+
+**Linux/Mac:**
+```bash
+git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
+cd products-brands-and-store
+./setup-project.sh
+```
+
+**Windows:**
+```cmd
+git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
+cd products-brands-and-store
+setup-project.bat
+```
+
+The script will automatically:
+- ✅ Check Docker installation
+- ✅ Setup environment file
+- ✅ Install Composer and NPM dependencies
+- ✅ Generate application key
+- ✅ Run migrations and seed database (15 brands, 15 categories, 100 products)
+- ✅ Build frontend assets
+- ✅ Start Docker containers
+- ✅ Optionally run tests
+
+### Manual Installation
+
+If you prefer manual setup, follow these steps:
 
 1. **Clone the repository:**
    ```bash
@@ -65,7 +95,7 @@ This project demonstrates senior-level development practices:
    ```bash
    ./vendor/bin/sail up -d
    ```
-   
+
    > **Note**: On Windows, use `vendor\bin\sail` or create an alias: `alias sail='./vendor/bin/sail'`
 
 4. **Install dependencies:**
@@ -95,6 +125,21 @@ This project demonstrates senior-level development practices:
 - **Application**: [http://localhost:8080](http://localhost:8080)
 - **Mailpit** (Email testing): [http://localhost:8025](http://localhost:8025)
 - **Meilisearch** (Search engine): [http://localhost:7700](http://localhost:7700)
+
+### Setup Script Options
+
+The automated setup scripts support additional options:
+
+```bash
+# Show help
+./setup-project.sh --help
+
+# Run only tests (skip full setup)
+./setup-project.sh --test-only
+
+# Start only containers (skip installation)
+./setup-project.sh --start-only
+```
 
 ## 🧪 Running Tests
 
