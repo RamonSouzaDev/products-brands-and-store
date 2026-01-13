@@ -1,0 +1,206 @@
+# Laravel Product Search - Senior Level Implementation
+
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.4-blue.svg)](https://php.net)
+[![Livewire](https://img.shields.io/badge/Livewire-3.x-pink.svg)](https://livewire.laravel.com)
+
+A modern Laravel application implementing a product search mechanism with combined filters using Livewire 3, built with senior-level architecture patterns including Repository Pattern, Service Layer, and DTOs.
+
+## ✨ Features
+
+- 🔍 **Advanced Search** - Real-time product search by name
+- 🏷️ **Multi-Filter Support** - Filter by categories and brands (multiple selection)
+- 🔗 **URL Persistence** - Search parameters persist on page refresh
+- 🎨 **Premium UI** - Modern, responsive design with dark mode support
+- 🏗️ **Senior Architecture** - Repository Pattern, Service Layer, DTOs
+- ✅ **Comprehensive Tests** - Feature and unit tests included
+- 🐳 **Docker Ready** - Laravel Sail for consistent development environment
+
+## 🏛️ Architecture Highlights
+
+This project demonstrates senior-level development practices:
+
+- **DTO Pattern** (`ProductFilterDTO`) - Type-safe filter parameter management
+- **Repository Pattern** - Clean data access abstraction
+- **Service Layer** (`ProductService`) - Business logic separation
+- **Query Scopes** - Reusable, chainable query logic
+- **Eager Loading** - Optimized database queries (N+1 prevention)
+- **Livewire 3** - Modern reactive components with URL persistence
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop) installed
+- Git
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
+   cd products-brands-and-store
+   ```
+
+2. **Copy environment file:**
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Start Docker containers:**
+   ```bash
+   ./vendor/bin/sail up -d
+   ```
+   
+   > **Note**: On Windows, use `vendor\bin\sail` or create an alias: `alias sail='./vendor/bin/sail'`
+
+4. **Install dependencies:**
+   ```bash
+   ./vendor/bin/sail composer install
+   ./vendor/bin/sail npm install
+   ```
+
+5. **Generate application key:**
+   ```bash
+   ./vendor/bin/sail artisan key:generate
+   ```
+
+6. **Run migrations and seed database:**
+   ```bash
+   ./vendor/bin/sail artisan migrate --seed
+   ```
+   This creates 15 brands, 15 categories, and 100 sample products.
+
+7. **Build frontend assets:**
+   ```bash
+   ./vendor/bin/sail npm run build
+   ```
+
+### Accessing the Application
+
+- **Application**: [http://localhost:8080](http://localhost:8080)
+- **Mailpit** (Email testing): [http://localhost:8025](http://localhost:8025)
+- **Meilisearch** (Search engine): [http://localhost:7700](http://localhost:7700)
+
+## 🧪 Running Tests
+
+Execute the automated test suite:
+
+```bash
+./vendor/bin/sail artisan test
+```
+
+Run specific test file:
+
+```bash
+./vendor/bin/sail artisan test --filter ProductFilteringTest
+```
+
+## 📁 Project Structure
+
+```
+app/
+├── DTOs/
+│   └── ProductFilterDTO.php          # Filter parameter encapsulation
+├── Livewire/
+│   └── ProductList.php                # Main product listing component
+├── Models/
+│   ├── Brand.php                      # Brand model with relationships
+│   ├── Category.php                   # Category model with relationships
+│   └── Product.php                    # Product model with query scopes
+├── Repositories/
+│   ├── Contracts/
+│   │   └── ProductRepositoryInterface.php
+│   └── Eloquent/
+│       └── ProductRepository.php      # Eloquent implementation
+└── Services/
+    └── ProductService.php             # Business logic layer
+
+database/
+├── factories/                         # Model factories for testing
+├── migrations/                        # Database schema
+└── seeders/                          # Initial data seeders
+
+tests/
+└── Feature/
+    └── ProductFilteringTest.php      # Comprehensive feature tests
+```
+
+## 🎯 Key Features Explained
+
+### Combined Filters
+- Search by product name (AND)
+- Filter by one or more categories (OR within categories)
+- Filter by one or more brands (OR within brands)
+- All filters work together (AND between filter types)
+
+### URL Persistence
+Filter parameters are stored in the URL using Livewire's `#[Url]` attribute:
+- `?q=search-term` - Search query
+- `?cat[]=1&cat[]=2` - Selected categories
+- `?brand[]=1&brand[]=2` - Selected brands
+
+Refresh the page and your filters remain active!
+
+### Clear Filters
+Click "Clear All" to reset all filters and return to the full product list.
+
+## 🛠️ Development
+
+### Stopping the Environment
+
+```bash
+./vendor/bin/sail down
+```
+
+### Rebuilding Containers
+
+```bash
+./vendor/bin/sail build --no-cache
+./vendor/bin/sail up -d
+```
+
+### Running Development Server (with hot reload)
+
+```bash
+./vendor/bin/sail npm run dev
+```
+
+### Troubleshooting
+
+If you encounter permission issues with Docker on Windows:
+
+1. **Storage Permissions**: Ensure proper permissions on `storage/` and `bootstrap/cache/` directories
+2. **View Cache**: Clear compiled views cache: `php artisan view:clear`
+3. **Livewire Cache**: Clear Livewire cache: `php artisan livewire:clear`
+4. **Full Cache Clear**: `php artisan cache:clear && php artisan config:clear && php artisan view:clear`
+
+## 📝 Code Quality
+
+This project follows Laravel and PHP best practices:
+
+- ✅ **PSR-12** coding standards
+- ✅ **Type declarations** on all methods
+- ✅ **Strict typing** where applicable
+- ✅ **Meaningful variable names**
+- ✅ **Single Responsibility Principle**
+- ✅ **Dependency Injection**
+- ✅ **Interface-based programming**
+
+## 🤝 Contributing
+
+This is a demonstration project showcasing senior-level Laravel development practices.
+
+## 📄 License
+
+This project is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+---
+
+<div align="center">
+  <p>Built with ❤️ using Laravel 12, Livewire 3, and PHP 8.4</p>
+  <p>
+    <a href="https://github.com/RamonSouzaDev">GitHub</a> •
+    <a href="mailto:dwmom@hotmail.com">Contact</a>
+  </p>
+</div>
