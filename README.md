@@ -66,14 +66,21 @@ cd products-brands-and-store
 setup-project.bat
 ```
 
+**Simple Version (Linux/Mac only):**
+```bash
+git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
+cd products-brands-and-store
+./setup-simple.sh
+```
+
 The script will automatically:
 - ✅ Check Docker installation
 - ✅ Setup environment file
+- ✅ Start Docker containers
 - ✅ Install Composer and NPM dependencies
 - ✅ Generate application key
 - ✅ Run migrations and seed database (15 brands, 15 categories, 100 products)
 - ✅ Build frontend assets
-- ✅ Start Docker containers
 - ✅ Optionally run tests
 
 ### Manual Installation

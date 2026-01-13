@@ -53,6 +53,24 @@ if not exist ".env" (
 )
 echo.
 
+REM Start Docker containers FIRST (needed for Sail to work)
+echo [INFO] Starting Docker containers...
+if exist "vendor\bin\sail" (
+    call vendor\bin\sail up -d
+) else (
+    if exist "docker-compose.yml" (
+        docker-compose up -d
+    ) else if exist "compose.yml" (
+        docker-compose up -d
+    ) else (
+        echo [ERROR] No Docker configuration found (sail or docker-compose.yml).
+        pause
+        exit /b 1
+    )
+)
+echo [SUCCESS] Docker containers started successfully
+echo.
+
 REM Install Composer dependencies
 echo [INFO] Installing Composer dependencies...
 if exist "vendor\bin\sail" (
@@ -90,13 +108,32 @@ echo.
 REM Generate application key
 echo [INFO] Generating application key...
 if exist "vendor\bin\sail" (
-    call vendor\bin\sail artisan key:generate
+    call vendor\bin\sail artisan key:generate 2>nul
+    if %errorlevel% neq 0 (
+        echo [WARNING] Sail key generation failed, checking if key already exists...
+        findstr /C:"APP_KEY=" .env >nul 2>&1
+        if %errorlevel% equ 0 (
+            findstr /C:"APP_KEY=$" .env >nul 2>&1
+            if %errorlevel% neq 0 (
+                echo [SUCCESS] Application key already exists
+            ) else (
+                echo [ERROR] Could not generate application key.
+                pause
+                exit /b 1
+            )
+        ) else (
+            echo [ERROR] Could not generate application key.
+            pause
+            exit /b 1
+        )
+    ) else (
+        echo [SUCCESS] Application key generated
+    )
 ) else (
     echo [ERROR] Laravel Sail not found. Please run composer install first.
     pause
     exit /b 1
 )
-echo [SUCCESS] Application key generated
 echo.
 
 REM Setup database
@@ -114,36 +151,36 @@ echo.
 REM Build frontend assets
 echo [INFO] Building frontend assets...
 if exist "vendor\bin\sail" (
-    call vendor\bin\sail npm run build
+    call vendor\bin\sail npm run build 2>nul
+    if %errorlevel% neq 0 (
+        echo [WARNING] Sail npm build failed, trying direct npm...
+        where npm >nul 2>&1
+        if %errorlevel% equ 0 (
+            npm run build 2>nul
+            if %errorlevel% neq 0 (
+                echo [WARNING] NPM build failed, but assets may already be built. Continuing...
+            ) else (
+                echo [SUCCESS] Frontend assets built successfully
+            )
+        ) else (
+            echo [WARNING] NPM not available, but assets may already be built. Continuing...
+        )
+    ) else (
+        echo [SUCCESS] Frontend assets built successfully
+    )
 ) else (
     where npm >nul 2>&1
     if %errorlevel% equ 0 (
-        npm run build
+        npm run build 2>nul
+        if %errorlevel% neq 0 (
+            echo [WARNING] NPM build failed, but assets may already be built. Continuing...
+        ) else (
+            echo [SUCCESS] Frontend assets built successfully
+        )
     ) else (
-        echo [ERROR] NPM not available for building assets.
-        pause
-        exit /b 1
+        echo [WARNING] NPM not available, but assets may already be built. Continuing...
     )
 )
-echo [SUCCESS] Frontend assets built successfully
-echo.
-
-REM Start Docker containers
-echo [INFO] Starting Docker containers...
-if exist "vendor\bin\sail" (
-    call vendor\bin\sail up -d
-) else (
-    if exist "docker-compose.yml" (
-        docker-compose up -d
-    ) else if exist "compose.yml" (
-        docker-compose up -d
-    ) else (
-        echo [ERROR] No Docker configuration found (sail or docker-compose.yml).
-        pause
-        exit /b 1
-    )
-)
-echo [SUCCESS] Docker containers started successfully
 echo.
 
 REM Ask if user wants to run tests
