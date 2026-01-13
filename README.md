@@ -1,10 +1,24 @@
 # Laravel Product Search - Senior Level Implementation
 
+<div align="center">
+
+<h1>Hello 👋, I'm Ramon Mendes - Software Developer</h1>
+
+<h3>A back-end developer passionate about technology</h3>
+
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.4-blue.svg)](https://php.net)
 [![Livewire](https://img.shields.io/badge/Livewire-3.x-pink.svg)](https://livewire.laravel.com)
 
-A modern Laravel application implementing a product search mechanism with combined filters using Livewire 3, built with senior-level architecture patterns including Repository Pattern, Service Layer, and DTOs.
+- 🔭 I am currently working on [Back-end project development](https://github.com/RamonSouzaDev/To-Do-List-)
+- 🌱 I'm currently learning **Software Architecture and Engineering**
+- 📫 How to reach me **dwmom@hotmail.com**
+
+</div>
+
+## 📋 Project Overview
+
+This is a Laravel application that implements a product search mechanism with combined filters using Livewire. Built with senior-level architecture patterns including Repository Pattern, Service Layer, and DTOs for clean, maintainable code.
 
 ## ✨ Features
 
@@ -189,7 +203,7 @@ This project follows Laravel and PHP best practices:
 
 ## 🤝 Contributing
 
-This is a demonstration project showcasing senior-level Laravel development practices.
+This is a demonstration project showcasing senior-level Laravel development practices. Feel free to explore the codebase and learn from the architecture patterns implemented.
 
 ## 📄 License
 
@@ -198,9 +212,10 @@ This project is open-sourced software licensed under the [MIT license](https://o
 ---
 
 <div align="center">
-  <p>Built with ❤️ using Laravel 12, Livewire 3, and PHP 8.4</p>
+  <p>Built with ❤️ by <strong>Ramon Mendes</strong> using Laravel 12, Livewire 3, and PHP 8.4</p>
   <p>
     <a href="https://github.com/RamonSouzaDev">GitHub</a> •
-    <a href="mailto:dwmom@hotmail.com">Contact</a>
+    <a href="mailto:dwmom@hotmail.com">Email</a> •
+    <a href="https://github.com/RamonSouzaDev/products-brands-and-store">View on GitHub</a>
   </p>
 </div>
