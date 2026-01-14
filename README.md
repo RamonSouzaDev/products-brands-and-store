@@ -173,6 +173,21 @@ The automated setup scripts support additional options:
 - Ensure adequate RAM allocation (4GB recommended)
 - Ports 8080, 8025, 7700 should be available
 
+### Docker Build (Alternative to Sail)
+
+For production deployments or CI/CD, use the included Dockerfile:
+
+```bash
+# Build the image
+docker build -t laravel-products .
+
+# Run with SQLite (default)
+docker run -p 8080:80 laravel-products
+
+# Or with MySQL
+docker run -e DB_CONNECTION=mysql -e DB_HOST=host.docker.internal -p 8080:80 laravel-products
+```
+
 ### Troubleshooting Permission Issues
 
 If you encounter permission errors after setup:
