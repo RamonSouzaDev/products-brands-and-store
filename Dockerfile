@@ -37,6 +37,43 @@ RUN composer install --no-dev --optimize-autoloader
 # Install Node.js dependencies and build assets
 RUN npm ci && npm run build
 
+# Create basic .env file for production
+RUN echo 'APP_NAME=Laravel\n\
+APP_ENV=production\n\
+APP_KEY=\n\
+APP_DEBUG=false\n\
+APP_TIMEZONE=UTC\n\
+APP_URL=http://localhost\n\
+APP_LOCALE=en\n\
+APP_FALLBACK_LOCALE=en\n\
+APP_FAKER_LOCALE=en_US\n\
+BCRYPT_ROUNDS=12\n\
+LOG_CHANNEL=stack\n\
+LOG_STACK=single\n\
+LOG_DEPRECATIONS_CHANNEL=null\n\
+LOG_LEVEL=error\n\
+DB_CONNECTION=sqlite\n\
+DB_DATABASE=database.sqlite\n\
+SESSION_DRIVER=file\n\
+SESSION_LIFETIME=120\n\
+SESSION_ENCRYPT=false\n\
+SESSION_PATH=/\n\
+SESSION_DOMAIN=null\n\
+BROADCAST_CONNECTION=log\n\
+FILESYSTEM_DISK=local\n\
+QUEUE_CONNECTION=database\n\
+CACHE_STORE=file\n\
+CACHE_PREFIX=\n\
+MAIL_MAILER=log\n\
+MAIL_HOST=127.0.0.1\n\
+MAIL_PORT=2525\n\
+MAIL_USERNAME=null\n\
+MAIL_PASSWORD=null\n\
+MAIL_ENCRYPTION=null\n\
+MAIL_FROM_ADDRESS="hello@example.com"\n\
+MAIL_FROM_NAME="${APP_NAME}"\n\
+VITE_APP_NAME="${APP_NAME}"' > .env
+
 # Generate application key
 RUN php artisan key:generate
 
