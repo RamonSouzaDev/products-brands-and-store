@@ -170,7 +170,7 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/${{ github.repository_owner }}/products-brands-and-store
+        images: ghcr.io/RamonSouzaDev/products-brands-and-store
         tags: |
           type=ref,event=branch
           type=ref,event=pr
@@ -190,8 +190,8 @@ jobs:
 
     - name: Test Docker image
       run: |
-        docker run --rm ghcr.io/${{ github.repository_owner }}/products-brands-and-store:latest php --version
-        docker run --rm ghcr.io/${{ github.repository_owner }}/products-brands-and-store:latest composer --version
+        docker run --rm ghcr.io/RamonSouzaDev/products-brands-and-store:latest php --version
+        docker run --rm ghcr.io/RamonSouzaDev/products-brands-and-store:latest composer --version
 
   deploy-staging:
     runs-on: ubuntu-latest
