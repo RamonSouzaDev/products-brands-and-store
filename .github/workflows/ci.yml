@@ -5,6 +5,7 @@ on:
     branches: [ master, main, develop ]
   pull_request:
     branches: [ master, main, develop ]
+  workflow_dispatch:
 
 jobs:
   test:
@@ -172,16 +173,13 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: |
-          ghcr.io/${{ toLower(github.repository_owner) }}/products-brands-and-store:latest
-          ghcr.io/${{ toLower(github.repository_owner) }}/products-brands-and-store:master
+        tags: ghcr.io/ramonsouzadev/products-brands-and-store:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
 
     - name: Test Docker image
       run: |
-        docker run --rm ghcr.io/${{ toLower(github.repository_owner) }}/products-brands-and-store:latest php --version
-        docker run --rm ghcr.io/${{ toLower(github.repository_owner) }}/products-brands-and-store:latest composer --version
+        docker run --rm ghcr.io/ramonsouzadev/products-brands-and-store:latest php --version
 
   deploy-staging:
     runs-on: ubuntu-latest
