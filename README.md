@@ -25,9 +25,10 @@ This is a Laravel application that implements a product search mechanism with co
 - 🔍 **Advanced Search** - Real-time product search by name
 - 🏷️ **Multi-Filter Support** - Filter by categories and brands (multiple selection)
 - 🔗 **URL Persistence** - Search parameters persist on page refresh
-- 🎨 **Premium UI** - Modern, responsive design with dark mode support
+- 🎨 **Orange & Grey Theme** - Custom color scheme with orange accents and grey elements
 - 🏗️ **Senior Architecture** - Repository Pattern, Service Layer, DTOs
 - ✅ **Comprehensive Tests** - Feature and unit tests included
+- 🔄 **CI/CD Pipeline** - GitHub Actions with automated testing and quality checks
 - 🐳 **Docker Ready** - Laravel Sail for consistent development environment
 
 ## 🏛️ Architecture Highlights
@@ -190,6 +191,34 @@ docker-compose exec laravel.test chmod -R 775 storage bootstrap/cache
 **Rebuild Assets After Changes:**
 ```bash
 ./rebuild-assets.bat
+```
+
+## 🔄 CI/CD Pipeline
+
+This project includes a comprehensive CI/CD pipeline with GitHub Actions that runs on every push and pull request:
+
+### Automated Checks:
+- ✅ **Unit & Feature Tests** - PHPUnit with 80%+ coverage requirement
+- ✅ **Code Quality** - PHPStan static analysis (level 5)
+- ✅ **Code Style** - Laravel Pint code formatting
+- ✅ **Security Audit** - Composer security checks
+- ✅ **Frontend Build** - Asset compilation testing
+- ✅ **Docker Build** - Container image building
+
+### Local Quality Checks:
+
+```bash
+# Run all tests with coverage
+composer test
+
+# Static analysis
+composer analyse
+
+# Code formatting
+composer format
+
+# Security audit
+composer audit
 ```
 
 ## 🧪 Running Tests

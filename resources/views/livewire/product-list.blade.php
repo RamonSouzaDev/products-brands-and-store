@@ -13,8 +13,8 @@
                     <div class="flex items-center justify-between mb-6">
                         <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Filters</h2>
                         @if($hasFilters)
-                            <button wire:click="clearFilters" 
-                                    class="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors">
+                            <button wire:click="clearFilters"
+                                    class="text-sm text-orange-600 hover:text-orange-700 dark:text-orange-400 dark:hover:text-orange-300 transition-colors">
                                 Clear All
                             </button>
                         @endif
@@ -25,10 +25,10 @@
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                             Search Products
                         </label>
-                        <input type="text" 
-                               wire:model.live.debounce.300ms="search" 
+                        <input type="text"
+                               wire:model.live.debounce.300ms="search"
                                placeholder="Search by name..."
-                               class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white transition-all">
+                               class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 dark:bg-gray-700 dark:text-white transition-all">
                     </div>
 
                     {{-- Categories --}}
@@ -39,10 +39,10 @@
                         <div class="space-y-2 max-h-64 overflow-y-auto">
                             @foreach($categories as $category)
                                 <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
-                                    <input type="checkbox" 
-                                           wire:model.live="selectedCategories" 
+                                    <input type="checkbox"
+                                           wire:model.live="selectedCategories"
                                            value="{{ $category->id }}"
-                                           class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700">
+                                           class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-700">
                                     <span class="ml-3 text-sm text-gray-700 dark:text-gray-300">{{ $category->name }}</span>
                                 </label>
                             @endforeach
@@ -57,10 +57,10 @@
                         <div class="space-y-2 max-h-64 overflow-y-auto">
                             @foreach($brands as $brand)
                                 <label class="flex items-center p-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer transition-colors">
-                                    <input type="checkbox" 
-                                           wire:model.live="selectedBrands" 
+                                    <input type="checkbox"
+                                           wire:model.live="selectedBrands"
                                            value="{{ $brand->id }}"
-                                           class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700">
+                                           class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500 dark:border-gray-600 dark:bg-gray-700">
                                     <span class="ml-3 text-sm text-gray-700 dark:text-gray-300">{{ $brand->name }}</span>
                                 </label>
                             @endforeach
@@ -77,12 +77,12 @@
                         Showing {{ $products->firstItem() ?? 0 }} - {{ $products->lastItem() ?? 0 }} of {{ $products->total() }} products
                     </div>
                     <div class="flex gap-2">
-                        <button wire:click="sortBy('name')" 
-                                class="px-3 py-1 text-sm rounded-lg {{ $sortBy === 'name' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300' }} transition-colors">
+                        <button wire:click="sortBy('name')"
+                                class="px-3 py-1 text-sm rounded-lg {{ $sortBy === 'name' ? 'bg-orange-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300' }} transition-colors">
                             Name {{ $sortBy === 'name' ? ($sortDirection === 'asc' ? '↑' : '↓') : '' }}
                         </button>
-                        <button wire:click="sortBy('price')" 
-                                class="px-3 py-1 text-sm rounded-lg {{ $sortBy === 'price' ? 'bg-blue-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300' }} transition-colors">
+                        <button wire:click="sortBy('price')"
+                                class="px-3 py-1 text-sm rounded-lg {{ $sortBy === 'price' ? 'bg-orange-600 text-white' : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300' }} transition-colors">
                             Price {{ $sortBy === 'price' ? ($sortDirection === 'asc' ? '↑' : '↓') : '' }}
                         </button>
                     </div>
@@ -100,10 +100,10 @@
                                 </div>
                                 
                                 <div class="flex gap-2 mb-3">
-                                    <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-xs rounded-full">
+                                    <span class="px-2 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 text-xs rounded-full">
                                         {{ $product->category->name }}
                                     </span>
-                                    <span class="px-2 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 text-xs rounded-full">
+                                    <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs rounded-full">
                                         {{ $product->brand->name }}
                                     </span>
                                 </div>
@@ -113,7 +113,7 @@
                                 </p>
 
                                 <div class="flex items-center justify-between">
-                                    <div class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                                    <div class="text-2xl font-bold text-orange-600 dark:text-orange-400">
                                         ${{ number_format($product->price, 2) }}
                                     </div>
                                     <div class="text-sm text-gray-500 dark:text-gray-400">

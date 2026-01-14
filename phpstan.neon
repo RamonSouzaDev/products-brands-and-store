@@ -1,0 +1,27 @@
+parameters:
+    level: 5
+    paths:
+        - app
+        - config
+        - database
+        - resources
+        - routes
+        - tests
+
+    excludePaths:
+        - vendor/*
+        - storage/*
+        - bootstrap/cache/*
+
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+
+    ignoreErrors:
+        - '#Call to an undefined method.*#'
+        - '#Access to an undefined property.*#'
+        - '#Variable \$_.* might not be defined.#'
+
+    editorUrl: 'vscode://file/%file%:%line%'
+
+includes:
+    - ./vendor/larastan/larastan/extension.neon
