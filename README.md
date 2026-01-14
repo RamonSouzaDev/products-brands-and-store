@@ -187,6 +187,11 @@ docker-compose exec laravel.test chown -R www-data:www-data storage bootstrap/ca
 docker-compose exec laravel.test chmod -R 775 storage bootstrap/cache
 ```
 
+**Rebuild Assets After Changes:**
+```bash
+./rebuild-assets.bat
+```
+
 ## 🧪 Running Tests
 
 Execute the automated test suite:
