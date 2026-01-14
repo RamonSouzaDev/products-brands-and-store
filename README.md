@@ -6,6 +6,7 @@
 
 <h3>A back-end developer passionate about technology</h3>
 
+
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.4-blue.svg)](https://php.net)
 [![Livewire](https://img.shields.io/badge/Livewire-3.x-pink.svg)](https://livewire.laravel.com)
