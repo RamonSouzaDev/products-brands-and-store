@@ -144,6 +144,7 @@ If you prefer manual setup, follow these steps:
 
 The automated setup scripts support additional options:
 
+**Linux/Mac (setup-project.sh):**
 ```bash
 # Show help
 ./setup-project.sh --help
@@ -154,6 +155,22 @@ The automated setup scripts support additional options:
 # Start only containers (skip installation)
 ./setup-project.sh --start-only
 ```
+
+### Platform-Specific Notes
+
+**🐧 WSL2 Users:**
+- Laravel Sail requires WSL2, not WSL1
+- If you can't access Windows files from WSL, run: `./setup-wsl.sh` for guidance
+- Alternative: Use Git Bash script from Windows side
+
+**🪟 Git Bash/MINGW64 Users:**
+- Laravel Sail doesn't work in Git Bash - use `setup-gitbash.bat` instead
+- This script uses docker-compose directly for compatibility
+
+**🐳 Docker Requirements:**
+- Docker Desktop must be running
+- Ensure adequate RAM allocation (4GB recommended)
+- Ports 8080, 8025, 7700 should be available
 
 ## 🧪 Running Tests
 
