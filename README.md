@@ -180,13 +180,13 @@ For production deployments or CI/CD, use the included Dockerfile. The CI/CD pipe
 #### Pull from GitHub Container Registry:
 ```bash
 # Login to GitHub Container Registry
-echo $GITHUB_TOKEN | docker login ghcr.io -u RamonSouzaDev --password-stdin
+echo $GITHUB_TOKEN | docker login ghcr.io -u ramonsouzadev --password-stdin
 
 # Pull the latest image
-docker pull ghcr.io/RamonSouzaDev/products-brands-and-store:latest
+docker pull ghcr.io/ramonsouzadev/products-brands-and-store:latest
 
 # Run the application
-docker run -p 8080:80 ghcr.io/RamonSouzaDev/products-brands-and-store:latest
+docker run -p 8080:80 ghcr.io/ramonsouzadev/products-brands-and-store:latest
 ```
 
 #### Build Locally:
