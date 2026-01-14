@@ -172,6 +172,21 @@ The automated setup scripts support additional options:
 - Ensure adequate RAM allocation (4GB recommended)
 - Ports 8080, 8025, 7700 should be available
 
+### Troubleshooting Permission Issues
+
+If you encounter permission errors after setup:
+
+**Git Bash/Windows:**
+```bash
+./fix-permissions.bat
+```
+
+**Manual Fix:**
+```bash
+docker-compose exec laravel.test chown -R www-data:www-data storage bootstrap/cache
+docker-compose exec laravel.test chmod -R 775 storage bootstrap/cache
+```
+
 ## 🧪 Running Tests
 
 Execute the automated test suite:
