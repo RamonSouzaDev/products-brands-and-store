@@ -175,8 +175,21 @@ The automated setup scripts support additional options:
 
 ### Docker Build (Alternative to Sail)
 
-For production deployments or CI/CD, use the included Dockerfile:
+For production deployments or CI/CD, use the included Dockerfile. The CI/CD pipeline automatically builds and pushes images to GitHub Container Registry.
 
+#### Pull from GitHub Container Registry:
+```bash
+# Login to GitHub Container Registry
+echo $GITHUB_TOKEN | docker login ghcr.io -u USERNAME --password-stdin
+
+# Pull the latest image
+docker pull ghcr.io/ramonsouzadev/products-brands-and-store:latest
+
+# Run the application
+docker run -p 8080:80 ghcr.io/ramonsouzadev/products-brands-and-store:latest
+```
+
+#### Build Locally:
 ```bash
 # Build the image
 docker build -t laravel-products .
@@ -187,6 +200,11 @@ docker run -p 8080:80 laravel-products
 # Or with MySQL
 docker run -e DB_CONNECTION=mysql -e DB_HOST=host.docker.internal -p 8080:80 laravel-products
 ```
+
+#### Available Tags:
+- `latest` - Latest build from main branch
+- `main` - Build from main branch
+- `main-<commit-sha>` - Specific commit builds
 
 ### Troubleshooting Permission Issues
 
