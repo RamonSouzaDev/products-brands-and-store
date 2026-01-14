@@ -47,36 +47,38 @@ class ProductServiceTest extends TestCase
             sortDirection: 'desc'
         );
 
-        $expectedPaginator = collect([
-            Product::factory()->make(['name' => 'Gaming Laptop'])
-        ]);
+        // Create a mock paginator
+        $mockPaginator = Mockery::mock(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class);
+        $mockPaginator->shouldReceive('total')->andReturn(1);
 
         $this->mockRepository
             ->shouldReceive('getFilteredProducts')
             ->once()
             ->with($filters, 15)
-            ->andReturn($expectedPaginator);
+            ->andReturn($mockPaginator);
 
         $result = $this->productService->getFilteredProducts($filters);
 
-        $this->assertEquals($expectedPaginator, $result);
+        $this->assertEquals($mockPaginator, $result);
     }
 
     /** @test */
     public function it_can_get_filtered_products_with_custom_per_page(): void
     {
         $filters = new ProductFilterDTO();
-        $expectedPaginator = collect([]);
+        // Create a mock paginator
+        $mockPaginator = Mockery::mock(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class);
+        $mockPaginator->shouldReceive('total')->andReturn(0);
 
         $this->mockRepository
             ->shouldReceive('getFilteredProducts')
             ->once()
             ->with($filters, 10)
-            ->andReturn($expectedPaginator);
+            ->andReturn($mockPaginator);
 
         $result = $this->productService->getFilteredProducts($filters, 10);
 
-        $this->assertEquals($expectedPaginator, $result);
+        $this->assertEquals($mockPaginator, $result);
     }
 
     /** @test */
@@ -84,7 +86,7 @@ class ProductServiceTest extends TestCase
     {
         $filters = new ProductFilterDTO(search: 'test');
 
-        $mockPaginator = Mockery::mock();
+        $mockPaginator = Mockery::mock(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class);
         $mockPaginator->shouldReceive('total')->andReturn(25);
 
         $this->mockRepository
@@ -106,7 +108,7 @@ class ProductServiceTest extends TestCase
     {
         $filters = new ProductFilterDTO(); // No filters
 
-        $mockPaginator = Mockery::mock();
+        $mockPaginator = Mockery::mock(\Illuminate\Contracts\Pagination\LengthAwarePaginator::class);
         $mockPaginator->shouldReceive('total')->andReturn(100);
 
         $this->mockRepository

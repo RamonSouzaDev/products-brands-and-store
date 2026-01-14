@@ -23,5 +23,5 @@ parameters:
 
     editorUrl: 'vscode://file/%file%:%line%'
 
-includes:
-    - ./vendor/larastan/larastan/extension.neon
+# includes:
+#     - ./vendor/larastan/larastan/extension.neon

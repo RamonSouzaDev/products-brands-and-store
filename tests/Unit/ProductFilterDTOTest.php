@@ -51,8 +51,8 @@ class ProductFilterDTOTest extends TestCase
         $dto = ProductFilterDTO::fromArray($data);
 
         $this->assertEquals('laptop', $dto->search);
-        $this->assertEquals([1, 2], $dto->categoryIds); // filtered empty values
-        $this->assertEquals([3, 4], $dto->brandIds); // filtered empty values
+        $this->assertEquals(['1', '2'], $dto->categoryIds); // filtered empty values
+        $this->assertEquals([0 => '3', 2 => '4'], $dto->brandIds); // filtered empty values, preserves keys
         $this->assertEquals('price', $dto->sortBy);
         $this->assertEquals('desc', $dto->sortDirection);
     }
