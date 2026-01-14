@@ -59,14 +59,21 @@ cd products-brands-and-store
 ./setup-project.sh
 ```
 
-**Windows:**
+**Windows (Git Bash/MINGW64):**
+```bash
+git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
+cd products-brands-and-store
+./setup-gitbash.bat
+```
+
+**Windows (PowerShell/CMD):**
 ```cmd
 git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
 cd products-brands-and-store
 setup-project.bat
 ```
 
-**Simple Version (Linux/Mac only):**
+**Simple Version (Linux/Mac/WSL2 only):**
 ```bash
 git clone https://github.com/RamonSouzaDev/products-brands-and-store.git
 cd products-brands-and-store
