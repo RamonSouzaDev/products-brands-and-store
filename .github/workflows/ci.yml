@@ -163,7 +163,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
-        file: ./vendor/laravel/sail/runtimes/8.4/Dockerfile
+        file: ./Dockerfile
         push: false
         tags: products-store:test
         cache-from: type=gha
