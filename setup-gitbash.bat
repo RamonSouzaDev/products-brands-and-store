@@ -69,13 +69,28 @@ echo.
 
 REM Wait a bit for containers to be fully ready
 echo [INFO] Waiting for containers to be ready...
-timeout /t 5 /nobreak >nul
+sleep 5
+
+REM Check if laravel.test container is running
+docker-compose ps laravel.test | findstr "Up" >nul
+if %errorlevel% neq 0 (
+    echo [ERROR] Laravel app container is not running. Checking container status...
+    docker-compose ps
+    echo [INFO] Waiting additional time for container to start...
+    sleep 10
+    docker-compose ps laravel.test | findstr "Up" >nul
+    if %errorlevel% neq 0 (
+        echo [ERROR] Laravel app container failed to start. Please check Docker logs.
+        pause
+        exit /b 1
+    )
+)
 echo [SUCCESS] Containers ready
 echo.
 
 REM Install Composer dependencies
 echo [INFO] Installing Composer dependencies...
-docker-compose exec -T app composer install --no-interaction
+docker-compose exec -T laravel.test composer install --no-interaction
 if %errorlevel% neq 0 (
     echo [WARNING] Composer install failed, but continuing...
 )
@@ -84,7 +99,7 @@ echo.
 
 REM Install NPM dependencies
 echo [INFO] Installing NPM dependencies...
-docker-compose exec -T app npm install
+docker-compose exec -T laravel.test npm install
 if %errorlevel% neq 0 (
     echo [WARNING] NPM install failed, but continuing...
 )
@@ -93,7 +108,7 @@ echo.
 
 REM Generate application key
 echo [INFO] Generating application key...
-docker-compose exec -T app php artisan key:generate
+docker-compose exec -T laravel.test php artisan key:generate
 if %errorlevel% neq 0 (
     echo [WARNING] Key generation failed, but continuing...
 )
@@ -102,7 +117,7 @@ echo.
 
 REM Setup database
 echo [INFO] Setting up database (migrations and seeders)...
-docker-compose exec -T app php artisan migrate --seed
+docker-compose exec -T laravel.test php artisan migrate --seed
 if %errorlevel% neq 0 (
     echo [WARNING] Database setup failed, but continuing...
 )
@@ -111,7 +126,7 @@ echo.
 
 REM Build frontend assets
 echo [INFO] Building frontend assets...
-docker-compose exec -T app npm run build
+docker-compose exec -T laravel.test npm run build
 if %errorlevel% neq 0 (
     echo [WARNING] Asset build failed, but continuing...
 )
@@ -123,7 +138,7 @@ echo.
 set /p run_tests="Do you want to run tests now? (y/n): "
 if /i "%run_tests%"=="y" (
     echo [INFO] Running tests...
-    docker-compose exec -T app php artisan test
+    docker-compose exec -T laravel.test php artisan test
     if %errorlevel% neq 0 (
         echo [WARNING] Tests failed, but setup is complete.
     )
@@ -144,8 +159,8 @@ echo.
 echo 🛠️  Useful Commands:
 echo    Stop containers:   docker-compose down
 echo    View logs:         docker-compose logs
-echo    Run tests:         docker-compose exec app php artisan test
-echo    Access container:  docker-compose exec app bash
+echo    Run tests:         docker-compose exec laravel.test php artisan test
+echo    Access container:  docker-compose exec laravel.test bash
 echo.
 echo 👨‍💻 Developed by: Ramon Mendes (dwmom@hotmail.com)
 echo 📂 Repository: https://github.com/RamonSouzaDev/products-brands-and-store
