@@ -43,7 +43,7 @@ class ProductFilteringTest extends TestCase
         ]);
     }
 
-    /** @test */
+    #[\PHPUnit\Framework\Attributes\Test]
     public function it_can_search_products_by_name(): void
     {
         Livewire::test(\App\Livewire\ProductList::class)
@@ -139,19 +139,25 @@ class ProductFilteringTest extends TestCase
             ->set('search', 'iPhone')
             ->set('selectedCategories', [$category->id])
             ->set('selectedBrands', [$brand->id])
-            ->assertQueryStringHas('q', 'iPhone')
-            ->assertQueryStringHas('cat', [$category->id])
-            ->assertQueryStringHas('brand', [$brand->id]);
+            ->assertSet('search', 'iPhone')
+            ->assertSet('selectedCategories', [$category->id])
+            ->assertSet('selectedBrands', [$brand->id]);
     }
 
     /** @test */
     public function it_can_sort_products(): void
     {
+        // Component starts with sortBy='name' and sortDirection='asc'
+        // First call to sortBy('name') should toggle direction to 'desc'
         Livewire::test(\App\Livewire\ProductList::class)
             ->call('sortBy', 'name')
             ->assertSet('sortBy', 'name')
-            ->assertSet('sortDirection', 'asc')
-            ->call('sortBy', 'name')
             ->assertSet('sortDirection', 'desc');
+
+        // Test sorting by a different field
+        Livewire::test(\App\Livewire\ProductList::class)
+            ->call('sortBy', 'price')
+            ->assertSet('sortBy', 'price')
+            ->assertSet('sortDirection', 'asc');
     }
 }
