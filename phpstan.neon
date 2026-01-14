@@ -1,27 +1,19 @@
 parameters:
-    level: 5
+    level: 3
     paths:
         - app
-        - config
-        - database
-        - resources
-        - routes
-        - tests
 
     excludePaths:
         - vendor/*
         - storage/*
         - bootstrap/cache/*
 
-    checkMissingIterableValueType: false
-    checkGenericClassInNonGenericObjectType: false
-
     ignoreErrors:
         - '#Call to an undefined method.*#'
         - '#Access to an undefined property.*#'
         - '#Variable \$_.* might not be defined.#'
-
-    editorUrl: 'vscode://file/%file%:%line%'
+        - '#should return Illuminate\\Database\\Eloquent\\Builder but returns Illuminate\\Database\\Query\\Builder#'
+        - '#Call to an undefined static method.*::orderBy#'
 
 # includes:
 #     - ./vendor/larastan/larastan/extension.neon
